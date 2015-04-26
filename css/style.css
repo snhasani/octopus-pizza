@@ -1,0 +1,107 @@
+html {
+    box-sizing: border-box;
+}
+
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    background-color: #FFE800;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+/*clearfix*/
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+header {
+    padding: 40px 0;
+    margin: 0 auto;
+    max-width: 42em;
+    text-align: center;
+}
+
+.logo {
+    color: #F93030;
+    font-size: 2.7rem;
+    margin: 0;
+}
+
+.order {
+    background-color: #fff;
+    text-align: center;
+}
+
+.order__btn {
+    background-color: #515050;
+    color: #FFF;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 20px 0;
+    padding: 20px 30px;
+    display: inline-block;
+}
+
+.order__btn:hover {
+    background-color: #FF2929;
+}
+
+.pizza-list {
+    list-style-type: none;
+    max-width: 700px;
+    margin: 20px auto 40px;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.pizza {
+    background-color: #F93030;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 15px 15px 0;
+    width: 7em;
+    height: 7em;
+    position: relative;
+}
+.pizza:first-child {
+    margin-left: 0;
+}
+
+.pizza__id {
+    color: #fff;
+    font-size: 2.5rem;
+    display: block;
+    margin: 10px 0;
+}
+
+.pizza__remove-btn {
+    color: #C30000;
+    font-size: 2rem;
+    font-family: arial;
+}
+
+.pizza__remove-btn:hover {
+    color: #9B0000;
+    font-weight: bold;
+}
+
+
+
+@media (min-width: 48em) { /*768px*/
+
+    .logo {
+        font-size: 4rem;
+    }
+    .pizza-list {
+        margin-top: 40px;
+    }
+}
