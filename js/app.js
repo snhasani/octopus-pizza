@@ -68,12 +68,13 @@
 
                 this.pizzaListWrapper[0].appendChild(elem);
 
-                elem.addEventListener('click', (function(pizzaCopy) {
-                    return function() {
-                        octopus.removeOrder(pizzaCopy.id);
-                        elem.remove();
-                    }
-                })(pizza));
+                elem.children[1]
+                    .addEventListener('click', (function(pizzaCopy) {
+                        return function(e) {
+                            octopus.removeOrder(pizzaCopy.id);
+                            elem.remove();
+                        }
+                    })(pizza));
 
             } else {
                 this.pizzaListWrapper[0].innerHTML = '';
