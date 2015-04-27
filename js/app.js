@@ -18,24 +18,14 @@
             view.init();
         },
 
-        setCurrentPizza : function(pizza) {
-           model.currentPizza = pizza;
-        },
-
-        getCurrentPizza : function() {
-            return model.currentPizza;
-        },
-
         addOrder : function() {
             var lastId = ++model.lastId;
-            var currentPizza = {
+            var pizza = {
                 id: lastId,
                 visiable: true
             };
-
-            model.pizzas[lastId] = currentPizza;
-
-            view.render([currentPizza]);
+            model.pizzas[lastId] = pizza;
+            view.render(pizza);
         },
 
         removeOrder : function(id) {
@@ -63,38 +53,33 @@
             this.render();
         },
 
-        render : function(pizzas) {
-            var i, len, elem;
-            pizzas = pizzas || [];
-            len = pizzas.length;
+        render : function(pizza) {
+            var elem;
+            pizza = pizza || {};
 
-            if (len) {
+            if (Object.keys(pizza).length) {
 
                 elem = document.createElement('li');
                 elem.setAttribute('class', 'pizza');
 
-                for(i = 0; i < len; i++){
-                    var currentPizza = pizzas[i];
+                elem.setAttribute('data-id', pizza.id);
+                elem.innerHTML =
+                    this.template.replace(/{id}/g, pizza.id);
 
-                    elem.setAttribute('data-id', currentPizza.id);
-                    elem.innerHTML =
-                        this.template.replace(/{id}/g, currentPizza.id);
+                this.pizzaListWrapper[0].appendChild(elem);
 
-                    this.pizzaListWrapper[0].appendChild(elem);
+                elem.addEventListener('click', (function(pizzaCopy) {
+                    return function() {
+                        octopus.removeOrder(pizzaCopy.id);
+                        elem.remove();
+                    }
+                })(pizza));
 
-                    elem.addEventListener('click', (function(pizzaCopy) {
-                        return function() {
-                            octopus.removeOrder(pizzaCopy.id);
-                            elem.remove();
-                        }
-                    })(currentPizza));
-                }
             } else {
                 this.pizzaListWrapper[0].innerHTML = '';
             }
         }
     };
-
 
     window.addEventListener('DOMContentLoaded', octopus.init, false);
 
