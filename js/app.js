@@ -77,7 +77,10 @@
                     var currentPizza = pizzas[i];
 
                     elem.setAttribute('data-id', currentPizza.id);
-                    elem.innerHTML = utils.twt(this.template, currentPizza);
+                    elem.innerHTML =
+                        this.template.replace(/{id}/g, currentPizza.id);
+
+                    this.pizzaListWrapper[0].appendChild(elem);
 
                     elem.addEventListener('click', (function(pizzaCopy) {
                         return function() {
@@ -85,30 +88,12 @@
                             elem.remove();
                         }
                     })(currentPizza));
-
-                    this.pizzaListWrapper[0].appendChild(elem);
                 }
             } else {
                 this.pizzaListWrapper[0].innerHTML = '';
             }
         }
     };
-
-    /*=============================
-    =          Utilities          =
-    =============================*/
-
-    var utils = {
-        twt : function(t, d) {
-            var s = t;
-            for(var p in d) {
-                s = s.replace(new RegExp('{'+p+'}','g'), d[p]);
-            }
-            return s;
-        }
-    }
-
-    /*---  End of Utilities  ---*/
 
 
     window.addEventListener('DOMContentLoaded', octopus.init, false);
